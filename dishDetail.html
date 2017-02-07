@@ -30,27 +30,22 @@
   <div class="container">
           <div class="row">
                <div id="exampleView" class="col-xs-12">
-                    <div class="subheader col-xs-12">
-                         <h3 class="col-xs-12">Select Dish</h3>
-                         <form class="col-xs-6">
-                              <input type="text" name="search" placeholder="Enter keywords">
-                              <button id="btnSearch" class="btn btn-success">Search</button>
-                         </form>
-                         <div id="dishType" class="col-xs-6 text-right">
-                              <select>
-                                   <option value="main dish">Main</option>
-                                   <option value="starter">Starter</option>
-                                   <option selected value="dessert">Dessert</option>
-                              </select>
-                         </div>
+                  <div class="col-sm-6">
+                    
+                    <div id="dishSummary"></div>
 
-                    </div>    
+                    <button id="backToOptions">Back to Select Dish</button>
+                    
+                    <div id="dishPreparation"></div>
 
-                    <div id="dishOptions" class="col-xs-12">
-                         <ul class="list-unstyled">       
-                         </ul>
-                    </div>
+                  </div>
 
+                  <div id="ingredients" class="col-sm-6">
+                    <ul class="list-unstyled">
+                    </ul>
+                    <div id="totalCost"></div>
+                    <button>Confirm Dish</button>
+                  </div>
                </div>
           </div>
           
