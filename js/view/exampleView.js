@@ -51,12 +51,17 @@ var ExampleView = function (container, model) {
 	var menu = model.getFullMenu();
 	var menuBox, menuImg, menuName, menuPrice, menuPrep, menu_final;
 	var total = model.getTotalMenuPrice();
+	var a = [];
+	for(i=0; i<menu.length; i++){
+		a[i] = model.getCostForDish(menu[i].id);
+	}
 	for(i=0; i<menu.length; i++){
 		menuImg = menu[i].image;
 		menuName = menu[i].name;
 		menuPrep = menu[i].description;
-		menuPrice = '?';                //need help/edit
-		//menuPrice = model.getCostForDish(i);
+		//menuPrice = '?';                //need help/edit
+		//menuPrice = model.getCostForDish(menu[i].id);
+		menuPrice = a[i];
 
 		menuBox = "<li class='col-sm-4'> <div class='thumbnail'><img src='images/"+menuImg+"'> <div class='caption'><h4>"+menuName+"</h4><p>"+menuPrice+"</p></div> </div></li>";
 		menu_final = "<li class='col-xs-12'><div class='col-xs-2'><img class='thumbnail' src=images/"+menuImg+"></div><div class='col-xs-5'><h3>"+menuName+"</h3></div><div class='col-xs-5'><h4>Preparetion</h4><br>"+menuPrep+"</div></li>"
@@ -64,6 +69,13 @@ var ExampleView = function (container, model) {
 		$("#instruction ul").append(menu_final);	
 	}
 	$("#totalPrice").append(total);
+	//for test
+	$("#totalPrice").append("<br><p>"+model.getCostForDish(menu[0].id)+"</p>");
+	$("#totalPrice").append("<br><p>"+model.getCostForDish(menu[1].id)+"</p>");
+	$("#totalPrice").append("<br><p>"+model.getCostForDish(menu[2].id)+"</p>");
+	$("#totalPrice").append("<br><p>"+a[0]+"</p>");
+	$("#totalPrice").append("<br><p>"+a[1]+"</p>");
+	$("#totalPrice").append("<br><p>"+a[2]+"</p>");
 
 	// get total price
 	this.totalCost = container.find("#totalCost");

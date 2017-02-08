@@ -6,7 +6,8 @@ var DinnerModel = function() {
 	this.numberOfGuests = 2; //save number of guests
 	this.menu = []; // save menu types
 	this.menu['French toast'] = 1; //test
-	this.menu['Sourdough Starter'] = 2;//test
+	this.menu['Sourdough Starter'] = 2;
+	this.menu['Meat balls'] = 100;//test
 
 
 
