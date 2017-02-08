@@ -5,6 +5,8 @@ var DinnerModel = function() {
 	// and selected dinner options for dinner menu
 	this.numberOfGuests = 2; //save number of guests
 	this.menu = []; // save menu types
+	this.menu['French toast'] = 1; //test
+	this.menu['Sourdough Starter'] = 2;//test
 
 
 
@@ -44,6 +46,10 @@ var DinnerModel = function() {
 	//Returns all the dishes on the menu.
 	this.getFullMenu = function() {
 		//TODO Lab 2
+		var dishes = [];
+		for(key in this.menu){
+			dishes.push(this.getDish(this.menu[key]));
+		}
 		return dishes;
 	}
 
@@ -59,33 +65,40 @@ var DinnerModel = function() {
 	//Returns all ingredients for all the dishes on the menu.
 	this.getAllIngredients = function() {
 		//TODO Lab 2
+		var ingredients = [];
+		for(key in this.menu) {
+			var dish = this.getDish(this.menu[key]);
+			ingredients = ingredients.concat(dish.ingredients);
+		}
+		return ingredients;
 	}
 
 	//Returns the total price of the menu (all the ingredients multiplied by number of guests).
-	this.getTotalMenuPrice = function(id) {
-		//TODO Lab 2
-		var total=0, ingredients;
-		for(key in dishes){
-			if(dishes[key].id == id) {
-				ingredients = dishes[key].ingredients;
-			}
+	this.getTotalMenuPrice = function() {
+		var ingredients = this.getAllIngredients();
+		var sum = 0.;
+		for(key in ingredients) {
+			sum += parseFloat(ingredients[key].price) * this.numberOfGuests;
 		}
-
-		for(i=0;i<ingredients.length;i++){
-			total+=ingredients[i].price;
-		}
-		return total*this.numberOfGuests;
+		return sum;
 	}
 
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
 	//it is removed from the menu and the new one added.
 	this.addDishToMenu = function(id) {
 		//TODO Lab 2 
+		this.menu[this.getDish(id).name] = id;
+		this.notifyObservers('menu');
 	}
 
 	//Removes dish from menu
 	this.removeDishFromMenu = function(id) {
 		//TODO Lab 2
+		var name = this.getDish(id).name;
+		if(this.menu[name] == id){
+			delete this.menu[name];
+		}
+		this.notifyObservers('menu');
 	}
 
 	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
@@ -117,6 +130,21 @@ var DinnerModel = function() {
 				return dishes[key];
 			}
 		}
+	}
+
+	this.getCostForDish = function (id) {
+		var total=0, ingredients;
+		for(key in dishes){
+			if(dishes[key].id == id) {
+				ingredients = dishes[key].ingredients;
+			}
+		}
+
+		for(i=0;i<ingredients.length;i++){
+			total+=ingredients[i].price;
+		}
+		return total*this.numberOfGuests;
+
 	}
 
 

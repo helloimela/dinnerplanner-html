@@ -46,10 +46,30 @@ var ExampleView = function (container, model) {
 		this.dishIngr.append("<li><span class='quantity'>"+quantity+" "+unit+"</span><span class='name'>"+name+"</span><span>SEK</span><span class='price'>"+price+"</span></li>");
 	}
 
+	//show overview page
+	this.overview = container.find("#overview");
+	var menu = model.getFullMenu();
+	var menuBox, menuImg, menuName, menuPrice, menuPrep, menu_final;
+	var total = model.getTotalMenuPrice();
+	for(i=0; i<menu.length; i++){
+		menuImg = menu[i].image;
+		menuName = menu[i].name;
+		menuPrep = menu[i].description;
+		menuPrice = '?';                //need help/edit
+		//menuPrice = model.getCostForDish(i);
+
+		menuBox = "<li class='col-sm-4'> <div class='thumbnail'><img src='images/"+menuImg+"'> <div class='caption'><h4>"+menuName+"</h4><p>"+menuPrice+"</p></div> </div></li>";
+		menu_final = "<li class='col-xs-12'><div class='col-xs-2'><img class='thumbnail' src=images/"+menuImg+"></div><div class='col-xs-5'><h3>"+menuName+"</h3></div><div class='col-xs-5'><h4>Preparetion</h4><br>"+menuPrep+"</div></li>"
+		$("#overview ul").append(menuBox);	
+		$("#instruction ul").append(menu_final);	
+	}
+	$("#totalPrice").append(total);
 
 	// get total price
 	this.totalCost = container.find("#totalCost");
-	this.totalCost.append("<span>Total : </span>"+model.getTotalMenuPrice(1)+" <span> SEK</span>");
+	this.totalCost.append("<span>Total : </span>"+model.getCostForDish(1)+" <span> SEK</span>");
 	
+	//final page
+
 }
  
