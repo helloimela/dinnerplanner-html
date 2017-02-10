@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
   </head>
-  <body class="home">
+  <body>
   	<div class="header">
   		<div class="container">
   			<div class="row">
@@ -27,15 +27,135 @@
   		</div>
   		
   	</div>
-	<div class="container">
+	<div id="exampleView" class="container">
 		<div class="row">
-			<div class="col-md-offset-8 col-md-4 col-sm-12 text-right cover-text">
-				<h3>A Home Dinner Service</h3>
-				<p>Spicy jalapeno bacon ipsum dolor amet non ribeye magna, minim pariatur voluptate duis. Voluptate cupidatat esse, cillum mollit meatball nulla in pastrami enim. Jerky ground round pariatur, esse velit incididunt ham fatback bresaola cupim commodo. Lorem andouille meatball jerky velit enim. Chicken ullamco in kevin pork nisi short ribs et occaecat laboris picanha landjaeger cupidatat.</p>
-				<button>Create My Dinner</button>
-			</div>
+			
+    <!-- Home view -->
+    <div id="view1" class="home col-md-offset-8 col-md-4 col-sm-12 text-right cover-text">
+      <h3>A Home Dinner Service</h3>
+      <p>Spicy jalapeno bacon ipsum dolor amet non ribeye magna, minim pariatur voluptate duis. Voluptate cupidatat esse, cillum mollit meatball nulla in pastrami enim. Jerky ground round pariatur, esse velit incididunt ham fatback bresaola cupim commodo. Lorem andouille meatball jerky velit enim. Chicken ullamco in kevin pork nisi short ribs et occaecat laboris picanha landjaeger cupidatat.</p>
+      <button id="toView2">Create My Dinner</button>
+    </div>
+
+    <!-- Sidebar View -->
+    <div id="view2" class="col-xs-12 col-md-4">
+      <h4>My Dinner</h4>
+      <p>
+        People :<span id="numberOfGuests"></span>
+      </p>
+      <div class="button-wrap">
+        <button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
+        <button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
+      </div>
+      <div class="dish-list">
+        <ul class="list-unstyled">
+          <li>
+            <div class="col-xs-6">Dish name</div>
+            <div class="col-xs-6">Cost</div>
+          </li>
+        </ul>
+        <p>
+          <span id="allTotalCost"></span>
+        </p>
+      </div>
+      <button id="confirmStep" class="btn btn-primary">Confirm Dinner</button>
+      
+    </div>
+
+    <!-- View 3 -->
+    <div id="view3" class="col-xs-12 col-md-8">
+      <div class="subheader col-xs-12">
+           <h3 class="col-xs-12">Select Dish</h3>
+           <form class="col-xs-6">
+                <input type="text" name="search" placeholder="Enter keywords">
+                <button id="btnSearch" class="btn btn-success">Search</button>
+           </form>
+           <div id="dishType" class="col-xs-6 text-right">
+                <select>
+                     <option value="main dish">Main</option>
+                     <option value="starter">Starter</option>
+                     <option selected value="dessert">Dessert</option>
+                </select>
+           </div>
+
+      </div>    
+
+      <div id="dishOptions" class="col-xs-12">
+           <ul class="list-unstyled">       
+           </ul>
+      </div>
+    </div>
+
+    <!-- View 4 -->
+    <div id="view4" class="col-xs-12 col-md-8">
+      <div class="col-sm-6">
+        
+        <div id="dishSummary"></div>
+
+        <button id="backToOptions">Back to Select Dish</button>
+        
+        <div id="dishPreparation"></div>
+
+      </div>
+
+      <div id="ingredients" class="col-sm-6">
+        <ul class="list-unstyled">
+        </ul>
+        <div id="totalCost"></div>
+        <button>Confirm Dish</button>
+      </div>
+    </div>
+
+
+    <!-- View 5 -->
+    <div id="view5" class="col-xs-12">
+      <div class="returnBar">
+        <div class="row">    
+          <div class="col-xs-1"></div>
+          <div class="col-xs-8">
+          <h4>My Dinner: <span id="numberOfGuests"></span> People</h4>            
+          </div>
+          <div class="col-xs-3">
+            <button><h5>Go back and edit dinner</h5></button>
+          </div>      
+        </div>
+      </div>
+
+      <div id="overview" class="col-xs-12">
+        <ul class="list-unstyled"> </ul>
+        <div class="col-xs-12">
+          <h4 >Total price: <span id="totalPrice"> </span></h4>
+          <button>Print Full Recipe</button>
+        </div>
+        
+      </div>
+    </div>
+
+
+    <!-- view 6 -->
+    <div id="view6" class="col-xs-12">
+      <div class="returnBar">
+        <div class="row">    
+          <div class="col-xs-1"></div>
+          <div class="col-xs-8">
+          <h4>My Dinner: <span id="numberOfGuests"></span> People</h4>            
+          </div>
+          <div class="col-xs-3">
+            <button><h5>Go back and edit dinner</h5></button>
+          </div>      
+        </div>
+      </div>
+
+      <div id="instruction" class="col-xs-12">
+        <ul class="list-unstyled">
+        </ul>
+      </div>
+    </div>
+
+
 		</div>
 	</div>
+  <!-- endof exampleView -->
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>

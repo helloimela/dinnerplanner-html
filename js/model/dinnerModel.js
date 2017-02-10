@@ -8,8 +8,17 @@ var DinnerModel = function() {
 	this.menu['French toast'] = 1; //test
 	this.menu['Sourdough Starter'] = 2;
 	this.menu['Meat balls'] = 100;//test
+	this._observers = [];
 
+	this.addObserver = function(observer){
+		this._observers.push(observer);
+	};
 
+	this.notifyObservers = function(arg){
+		for(i=0; i<this._observers.length; i++){
+			this._observers[i].update(arg);
+		}
+	}
 
 	this.setNumberOfGuests = function(num) {
 		//TODO Lab 2
@@ -384,6 +393,11 @@ var DinnerModel = function() {
 			'quantity':100,
 			'unit':'ml',
 			'price':6
+			},{ 
+			'name':'sugar',
+			'quantity':50,
+			'unit':'gr',
+			'price':10
 			}]
 		},{
 		'id':202,

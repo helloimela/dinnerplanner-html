@@ -6,44 +6,71 @@ var ExampleView = function (container, model) {
 	this.numberOfGuests = container.find("#numberOfGuests");
 	this.plusButton = container.find("#plusGuest");
 	this.minusButton = container.find("#minusGuest");
+	this.view3 = container.find("#view3");
+	this.view4 = container.find("#view4");
 	
 	this.numberOfGuests.html(model.getNumberOfGuests());
 
+	model.addObserver(this);
+
+	this.update = function(arg){
+		this.numberOfGuests.html(model.getNumberOfGuests());
+		if(arg==='menu'){
+
+		}
+	}
 
 	//get dish type from selected options
 	this.dishType = $('#dishType select option:selected').val();
+	this.selectDishType = container.find('#dishType select');
+	
 
-	// display all dishes
-	var dishes = model.getSelectedDish(this.dishType);
-	var dishWrapper, dishImg, dishName, dishDesc;
-	for (i = 0; i<dishes.length;i++) {
-		dishImg = dishes[i].image;
-		dishName = dishes[i].name;
-		dishDesc = dishes[i].description;
+	// VIEW 3 display all dishes
+	this.updateDishType = function(dishType){
+		var dishes = model.getSelectedDish(dishType);
+		var dishWrapper, dishImg, dishName, dishDesc;
+		$("#dishOptions ul").empty();
+		for (i = 0; i<dishes.length;i++) {
+			dishImg = dishes[i].image;
+			dishName = dishes[i].name;
+			dishDesc = dishes[i].description.substr(0,25)+'...';
 
-		dishWrapper="<li class='col-sm-4'> <div class='thumbnail'><img src='images/"+dishImg+"'> <div class='caption'><h4>"+dishName+"</h4><p>"+dishDesc+"</p></div> </div></li>";
+			dishWrapper="<li class='col-sm-4'> <div id='"+dishes[i].id+"' class='thumbnail'><img src='images/"+dishImg+"'> <div class='caption'><h4>"+dishName+"</h4><p>"+dishDesc+"</p></div> </div></li>";
 
-		$("#dishOptions ul").append(dishWrapper);
+			$("#dishOptions ul").append(dishWrapper);
+		}
 	}
 
-	//detail page
-	this.dishSummary = container.find("#dishSummary");
-	this.dishPrep = container.find("#dishPreparation");
-	this.dishIngr = container.find("#ingredients ul");
+	this.updateDishType(this.dishType);
+	
 
-	this.oneDish = model.getDish(1);
-	this.showIngredients = model.getIngredients(1);
+	// VIEW 4 detail page
+	this.backToOptions = container.find('#backToOptions');
+	this.showView4 = function(id){
+		var id = parseInt(id);
+		this.view3.hide();
+		this.view4.show();
+		this.dishSummary = container.find("#dishSummary");
+		this.dishPrep = container.find("#dishPreparation");
+		this.dishIngr = container.find("#ingredients ul");
 
-	this.dishSummary.append("<h4>"+this.oneDish.name+"</h4> <img src='images/"+this.oneDish.image+"'> <p>"+this.oneDish.description+"</p>");
+		this.dishSummary.empty();
+		this.dishIngr.empty();
 
-	//get complete ingredients for one dish
-	var quantity, unit, name, price;
-	for(i=0; i<this.showIngredients.length;i++){
-		quantity = this.showIngredients[i].quantity;
-		unit = this.showIngredients[i].unit;
-		name = this.showIngredients[i].name;
-		price = this.showIngredients[i].price;
-		this.dishIngr.append("<li><span class='quantity'>"+quantity+" "+unit+"</span><span class='name'>"+name+"</span><span>SEK</span><span class='price'>"+price+"</span></li>");
+		this.oneDish = model.getDish(id);
+		this.showIngredients = model.getIngredients(id);
+
+		this.dishSummary.append("<h4>"+this.oneDish.name+"</h4> <img src='images/"+this.oneDish.image+"'> <p>"+this.oneDish.description+"</p>");
+
+		//get complete ingredients for one dish
+		var quantity, unit, name, price;
+		for(i=0; i<this.showIngredients.length;i++){
+			quantity = this.showIngredients[i].quantity;
+			unit = this.showIngredients[i].unit;
+			name = this.showIngredients[i].name;
+			price = this.showIngredients[i].price;
+			this.dishIngr.append("<li><span class='quantity'>"+quantity+" "+unit+"</span><span class='name'>"+name+"</span><span>SEK</span><span class='price'>"+price+"</span></li>");
+		}
 	}
 
 	//show overview page
