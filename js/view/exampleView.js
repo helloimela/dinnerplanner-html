@@ -6,26 +6,48 @@ var ExampleView = function (container, model) {
 	this.numberOfGuests = container.find("#numberOfGuests");
 	this.plusButton = container.find("#plusGuest");
 	this.minusButton = container.find("#minusGuest");
+	this.menuListTotal = container.find("#allTotalCost");
 	this.view3 = container.find("#view3");
 	this.view4 = container.find("#view4");
-	
-	this.numberOfGuests.html(model.getNumberOfGuests());
 
 	model.addObserver(this);
 
 	this.update = function(arg){
-		this.numberOfGuests.html(model.getNumberOfGuests());
-		if(arg==='menu'){
-
+		
+		if(arg==='changeGuest'){
+			this.numberOfGuests.html(model.getNumberOfGuests());
+			this.updateMenuList();
+		} else if(arg==='menu'){
+			this.updateMenuList();
 		}
 	}
+
+
+	// VIEW 2 Sidebar
+	this.numberOfGuests.html(model.getNumberOfGuests());
+	this.menuList = container.find('#view2MenuList');
+	// menuList.append();
+	this.updateMenuList = function(){
+		this.menuList.empty();
+		var getMenu = model.getFullMenu();
+		var menuListWrapper, costDish;
+		for(i=0;i<getMenu.length;i++){
+			costDish = model.getCostForDish(getMenu[i].id);
+			menuListWrapper = "<li><div class='col-xs-6'>"+getMenu[i].name+"</div><div class='col-xs-6 text-right'>"+costDish+"</div></li>";
+			this.menuList.append(menuListWrapper);
+		}
+		this.menuListTotal.empty().append(model.getTotalMenuPrice());
+
+	}
+	this.updateMenuList();
+	
+
+	// VIEW 3 display all dishes
 
 	//get dish type from selected options
 	this.dishType = $('#dishType select option:selected').val();
 	this.selectDishType = container.find('#dishType select');
-	
 
-	// VIEW 3 display all dishes
 	this.updateDishType = function(dishType){
 		var dishes = model.getSelectedDish(dishType);
 		var dishWrapper, dishImg, dishName, dishDesc;
@@ -40,14 +62,19 @@ var ExampleView = function (container, model) {
 			$("#dishOptions ul").append(dishWrapper);
 		}
 	}
-
 	this.updateDishType(this.dishType);
 	
 
 	// VIEW 4 detail page
 	this.backToOptions = container.find('#backToOptions');
+	this.currentID;
+	// add dish button
+	this.addDishButton = container.find("#addDishButton");
+
+	// function to show view 4
 	this.showView4 = function(id){
 		var id = parseInt(id);
+		this.currentID = id;
 		this.view3.hide();
 		this.view4.show();
 		this.dishSummary = container.find("#dishSummary");
@@ -71,7 +98,11 @@ var ExampleView = function (container, model) {
 			price = this.showIngredients[i].price;
 			this.dishIngr.append("<li><span class='quantity'>"+quantity+" "+unit+"</span><span class='name'>"+name+"</span><span>SEK</span><span class='price'>"+price+"</span></li>");
 		}
+
+		this.totalDishCost = container.find("#totalDishCost");
+		this.totalDishCost.empty().append("<span>Total : </span>"+model.getCostForDish(id)+" <span> SEK</span>");
 	}
+
 
 	//show overview page
 	this.overview = container.find("#overview");

@@ -25,6 +25,7 @@ var DinnerModel = function() {
 		if(num>0){
 			this.numberOfGuests = num;	
 		}
+		this.notifyObservers('changeGuest');
 	}
 
 	// should return 

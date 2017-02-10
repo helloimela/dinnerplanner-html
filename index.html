@@ -15,14 +15,12 @@
   	<div class="header">
   		<div class="container">
   			<div class="row">
-  				<div class="col-xs-12">
   					<div class="col-xs-12 col-md-6">
   						<h1 class="logo">Homelette</h1>
   					</div>
   					<div class="header-text col-xs-12 col-md-6 text-right">
   						<p>From the best chefs in the world directly to your kitchen</p>
   					</div>
-  				</div>
   			</div>
   		</div>
   		
@@ -31,34 +29,31 @@
 		<div class="row">
 			
     <!-- Home view -->
-    <div id="view1" class="home col-md-offset-8 col-md-4 col-sm-12 text-right cover-text">
+    <div id="view1" class="col-md-offset-8 col-md-4 col-sm-12 text-right cover-text">
+      <div class="home-bg"></div>
       <h3>A Home Dinner Service</h3>
       <p>Spicy jalapeno bacon ipsum dolor amet non ribeye magna, minim pariatur voluptate duis. Voluptate cupidatat esse, cillum mollit meatball nulla in pastrami enim. Jerky ground round pariatur, esse velit incididunt ham fatback bresaola cupim commodo. Lorem andouille meatball jerky velit enim. Chicken ullamco in kevin pork nisi short ribs et occaecat laboris picanha landjaeger cupidatat.</p>
-      <button id="toView2">Create My Dinner</button>
+      <button id="toView2" class="btn btn-success">Create My Dinner</button>
     </div>
 
-    <!-- Sidebar View -->
+    <!-- View 2 Sidebar View -->
     <div id="view2" class="col-xs-12 col-md-4">
-      <h4>My Dinner</h4>
-      <p>
-        People :<span id="numberOfGuests"></span>
-      </p>
+      <h3>My Dinner</h3>
+      <h4>
+        People : <span id="numberOfGuests"></span>
+      </h4>
       <div class="button-wrap">
         <button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
         <button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
       </div>
       <div class="dish-list">
-        <ul class="list-unstyled">
-          <li>
-            <div class="col-xs-6">Dish name</div>
-            <div class="col-xs-6">Cost</div>
-          </li>
-        </ul>
-        <p>
-          <span id="allTotalCost"></span>
-        </p>
+        <div class="col-xs-6"><strong>Dish name</strong></div>
+        <div class="col-xs-6 text-right"><strong>Cost</strong></div>
+        <ul id="view2MenuList" class="list-unstyled"></ul>
+        <div class="col-xs-6"><h4>Total</h4></div>
+        <div class="col-xs-6 text-right"><h4 id="allTotalCost"></h4></div>
       </div>
-      <button id="confirmStep" class="btn btn-primary">Confirm Dinner</button>
+      <button id="confirmStep" class="col-xs-12 btn btn-primary">Confirm Dinner</button>
       
     </div>
 
@@ -67,7 +62,7 @@
       <div class="subheader col-xs-12">
            <h3 class="col-xs-12">Select Dish</h3>
            <form class="col-xs-6">
-                <input type="text" name="search" placeholder="Enter keywords">
+                <input type="text" class="search-input" name="search" placeholder="Enter keywords">
                 <button id="btnSearch" class="btn btn-success">Search</button>
            </form>
            <div id="dishType" class="col-xs-6 text-right">
@@ -92,17 +87,18 @@
         
         <div id="dishSummary"></div>
 
-        <button id="backToOptions">Back to Select Dish</button>
+        <button id="backToOptions" class="btn btn-default">Back to Select Dish</button>
         
         <div id="dishPreparation"></div>
 
       </div>
 
       <div id="ingredients" class="col-sm-6">
+        <h4>Ingredients</h4>
         <ul class="list-unstyled">
         </ul>
-        <div id="totalCost"></div>
-        <button>Confirm Dish</button>
+        <div id="totalDishCost"></div>
+        <button id="addDishButton" class="btn btn-success">Add Dish</button>
       </div>
     </div>
 

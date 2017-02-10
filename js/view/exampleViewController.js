@@ -14,27 +14,16 @@ function ExampleViewController(view,model){
 	view.minusButton.click(function(){
 		var currentNum = model.getNumberOfGuests();
 		model.setNumberOfGuests(currentNum-1);
-		view.update();
 	});
 
 	view.plusButton.click(function(){
 		var currentNum = model.getNumberOfGuests();
 		model.setNumberOfGuests(currentNum+1);
-		view.update();
 	});
 
 	view.selectDishType.change(function(){
-		// view.dishType = $('#dishType select option:selected').val();
 		view.updateDishType($('#dishType select option:selected').val());
-		// console.log($('#dishType select option:selected').val());
 	});
-
-	// $('.thumbnail').each(function(){
-	// 	$(this).on('click',function(){
-	// 		view.showView4($(this).attr('id'));
-	// 		console.log('click');
-	// 	});	
-	// });
 
 	$('#dishOptions').on('click','.thumbnail', function(){
 		view.showView4($(this).attr('id'));
@@ -44,4 +33,9 @@ function ExampleViewController(view,model){
 		view.view4.hide();
 		view.view3.show();
 	});
+
+	$('#ingredients').on('click','#addDishButton',function(){
+		model.addDishToMenu(view.currentID);
+		console.log(view.currentID);
+	})
 }
