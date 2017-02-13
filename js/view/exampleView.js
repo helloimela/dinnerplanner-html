@@ -115,7 +115,7 @@ var ExampleView = function (container, model) {
 		menuPrep = menu[i].description;
 		menuPrice = model.getCostForDish(menu[i].id);
 
-		menuBox = "<li class='col-sm-4'> <div class='thumbnail'><img src='images/"+menuImg+"'> <div class='caption'><h4>"+menuName+"</h4><p>"+menuPrice+"</p></div> </div></li>";
+		menuBox = "<li class='col-sm-4'> <div class='thumbnail'><img src='images/"+menuImg+"'> <div class='caption'><h4>"+menuName+"</h4><p>"+menuPrice+" sek</p></div> </div></li>";
 		menu_final = "<li class='col-xs-12'><div class='col-xs-2'><img class='thumbnail' src=images/"+menuImg+"></div><div class='col-xs-5'><h3>"+menuName+"</h3></div><div class='col-xs-5'><h4>Preparetion</h4><br>"+menuPrep+"</div></li>"
 		$("#overview ul").append(menuBox);	
 		$("#instruction ul").append(menu_final);	

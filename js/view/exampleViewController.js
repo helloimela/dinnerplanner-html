@@ -38,4 +38,28 @@ function ExampleViewController(view,model){
 		model.addDishToMenu(view.currentID);
 		console.log(view.currentID);
 	})
+
+	$('#confirmStep').click(function(){
+		$('#view2').hide();
+		$('#view3').hide();
+		$('#view5').show();
+	})
+
+	$('#goBack').click(function(){
+		$('#view5').hide();
+		$('#view2').show();
+		$('#view3').show();
+	})
+
+	$('#printRecipe').click(function(){
+		$('#view5').hide();
+		$('#view6').show();		
+	})
+
+	$('#goBack2').click(function(){
+		$('#view6').hide();
+		$('#view2').show();
+		$('#view3').show();
+	})
+
 }
