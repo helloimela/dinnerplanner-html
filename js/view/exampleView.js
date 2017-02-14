@@ -4,6 +4,8 @@ var ExampleView = function (container, model) {
 	// Get all the relevant elements of the view (ones that show data
   	// and/or ones that responed to interaction)
 	this.numberOfGuests = container.find("#numberOfGuests");
+	this.numberOfGuests1 = container.find("#numberOfGuests1");
+	this.numberOfGuests2 = container.find("#numberOfGuests2");
 	this.plusButton = container.find("#plusGuest");
 	this.minusButton = container.find("#minusGuest");
 	this.menuListTotal = container.find("#allTotalCost");
@@ -16,28 +18,40 @@ var ExampleView = function (container, model) {
 		
 		if(arg==='changeGuest'){
 			this.numberOfGuests.html(model.getNumberOfGuests());
+			this.numberOfGuests1.html(model.getNumberOfGuests());
+			this.numberOfGuests2.html(model.getNumberOfGuests());
 			this.updateMenuList();
+			this.updateView5();
+			//console.log();
+			//$('numberOfGuests1').html(model.getNumberOfGuests());
+			//$('numberOfGuests2').html(model.getNumberOfGuests());
 		} else if(arg==='menu'){
 			this.updateMenuList();
+			this.updateView5();
 		}
 	}
 
 
 	// VIEW 2 Sidebar
 	this.numberOfGuests.html(model.getNumberOfGuests());
+	this.numberOfGuests1.html(model.getNumberOfGuests());
+	this.numberOfGuests2.html(model.getNumberOfGuests());
 	this.menuList = container.find('#view2MenuList');
 	// menuList.append();
+	var finalMenu = [];
 	this.updateMenuList = function(){
 		this.menuList.empty();
+		finalMenu = [];
 		var getMenu = model.getFullMenu();
 		var menuListWrapper, costDish;
-		for(i=0;i<getMenu.length;i++){
+		for(var i=0;i<getMenu.length;i++){
 			costDish = model.getCostForDish(getMenu[i].id);
 			menuListWrapper = "<li><div class='col-xs-8'>"+getMenu[i].name+"</div><div class='col-xs-4 text-right'>"+costDish+" <span id='"+getMenu[i].id+"' class='glyphicon glyphicon-remove'> </span></div></li>";
 			this.menuList.append(menuListWrapper);
 		}
 		this.menuListTotal.empty().append(model.getTotalMenuPrice());
-
+		finalMenu = model.getFullMenu();
+		//console.log(finalMenu);
 	}
 	this.updateMenuList();
 	
@@ -104,29 +118,30 @@ var ExampleView = function (container, model) {
 	}
 
 
-	//show overview page
-	this.overview = container.find("#overview");
-	var menu = model.getFullMenu();
-	var menuBox, menuImg, menuName, menuPrice, menuPrep, menu_final;
-	var total = model.getTotalMenuPrice();
-	for(var i=0; i<menu.length; i++){
-		menuImg = menu[i].image;
-		menuName = menu[i].name;
-		menuPrep = menu[i].description;
-		menuPrice = model.getCostForDish(menu[i].id);
+	//show overview page & instruction page
+	this.overviewList = container.find('#overviewList');
+	this.instructionList = container.find('#instructionList');
+	this.totalPrice = container.find('#totalPrice');
+	this.updateView5 = function(){
+		//this.overview.empty();
+		this.overviewList.empty();
+		this.instructionList.empty();
+		var menuBox, menuImg, menuName, menuPrice, menuPrep, menu_final;
+		for(var i=0;i<finalMenu.length;i++){
+			menuImg = finalMenu[i].image;
+			menuName = finalMenu[i].name;
+			menuPrep = finalMenu[i].description;
+			menuPrice = model.getCostForDish(finalMenu[i].id);
 
-		menuBox = "<li class='col-sm-4'> <div class='thumbnail'><img src='images/"+menuImg+"'> <div class='caption'><h4>"+menuName+"</h4><p>"+menuPrice+" sek</p></div> </div></li>";
-		menu_final = "<li class='col-xs-12'><div class='col-xs-2'><img class='thumbnail' src=images/"+menuImg+"></div><div class='col-xs-5'><h3>"+menuName+"</h3></div><div class='col-xs-5'><h4>Preparetion</h4><br>"+menuPrep+"</div></li>"
-		$("#overview ul").append(menuBox);	
-		$("#instruction ul").append(menu_final);	
+			menuBox = "<li class='col-sm-3'> <div class='thumbnail'><img src='images/"+menuImg+"'> <div class='caption'><h4>"+menuName+"</h4><p>"+menuPrice+" sek</p></div> </div></li>";
+			menu_final = "<li class='col-xs-12'><div class='col-xs-2'><img class='thumbnail' src=images/"+menuImg+"></div><div class='col-xs-5'><h3>"+menuName+"</h3></div><div class='col-xs-5'><h4>Preparetion</h4><br>"+menuPrep+"</div></li>"
+			$("#overviewList").append(menuBox);	
+			$("#instructionList").append(menu_final);
+		}
+
+		this.totalPrice.html(model.getTotalMenuPrice());
 	}
-	$("#totalPrice").append(total);
 
-	// get total price
-	this.totalCost = container.find("#totalCost");
-	this.totalCost.append("<span>Total : </span>"+model.getCostForDish(1)+" <span> SEK</span>");
-	
-	//final page
 
 }
  
