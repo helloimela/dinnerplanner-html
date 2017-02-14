@@ -5,9 +5,7 @@ var DinnerModel = function() {
 	// and selected dinner options for dinner menu
 	this.numberOfGuests = 2; //save number of guests
 	this.menu = []; // save menu types
-	this.menu['French toast'] = 1; //test
-	this.menu['Sourdough Starter'] = 2;
-	this.menu['Meat balls'] = 100;//test
+	
 	this._observers = [];
 
 	this.addObserver = function(observer){
@@ -155,6 +153,21 @@ var DinnerModel = function() {
 			total+=ingredients[i].price;
 		}
 		return total*this.numberOfGuests;
+
+	}
+
+	this.getCostOneDish = function (id) {
+		var total=0, ingredients;
+		for(key in dishes){
+			if(dishes[key].id == id) {
+				ingredients = dishes[key].ingredients;
+			}
+		}
+
+		for(i=0;i<ingredients.length;i++){
+			total+=ingredients[i].price;
+		}
+		return total;
 
 	}
 

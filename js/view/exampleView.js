@@ -33,7 +33,7 @@ var ExampleView = function (container, model) {
 		var menuListWrapper, costDish;
 		for(i=0;i<getMenu.length;i++){
 			costDish = model.getCostForDish(getMenu[i].id);
-			menuListWrapper = "<li><div class='col-xs-6'>"+getMenu[i].name+"</div><div class='col-xs-6 text-right'>"+costDish+"</div></li>";
+			menuListWrapper = "<li><div class='col-xs-8'>"+getMenu[i].name+"</div><div class='col-xs-4 text-right'>"+costDish+" <span id='"+getMenu[i].id+"' class='glyphicon glyphicon-remove'> </span></div></li>";
 			this.menuList.append(menuListWrapper);
 		}
 		this.menuListTotal.empty().append(model.getTotalMenuPrice());
@@ -100,7 +100,7 @@ var ExampleView = function (container, model) {
 		}
 
 		this.totalDishCost = container.find("#totalDishCost");
-		this.totalDishCost.empty().append("<span>Total : </span>"+model.getCostForDish(id)+" <span> SEK</span>");
+		this.totalDishCost.empty().append("<span>Total : </span>"+model.getCostOneDish(id)+" <span> SEK</span>");
 	}
 
 

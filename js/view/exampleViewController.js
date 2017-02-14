@@ -42,6 +42,7 @@ function ExampleViewController(view,model){
 	$('#confirmStep').click(function(){
 		$('#view2').hide();
 		$('#view3').hide();
+		$('#view4').hide();
 		$('#view5').show();
 	})
 
@@ -61,5 +62,11 @@ function ExampleViewController(view,model){
 		$('#view2').show();
 		$('#view3').show();
 	})
+
+	// Remove menu from list
+	$('#view2MenuList').on('click','.glyphicon.glyphicon-remove', function(e){
+		model.removeDishFromMenu(e.currentTarget.id);
+		//console.log(e.currentTarget.id);
+	});
 
 }

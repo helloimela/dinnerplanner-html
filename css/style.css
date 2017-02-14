@@ -43,6 +43,10 @@
 	margin-top: 20px;
 }
 
+#view2MenuList{
+	padding: 0;
+}
+
 #ingredients span{
 	display: inline-block;
 	margin-right: 5px;
@@ -74,4 +78,11 @@
 
 .thumbnail img{
 	width: 100%;
+}
+.glyphicon.glyphicon-remove{
+	color: #ca3232;
+	cursor: pointer;
+}
+.glyphicon.glyphicon-remove:hover{
+	color: #e97474;
 }
