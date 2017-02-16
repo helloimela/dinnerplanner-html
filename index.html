@@ -61,12 +61,12 @@
     <div id="view3" class="col-xs-12 col-md-8">
       <div class="subheader col-xs-12">
            <h3 class="col-xs-12">Select Dish</h3>
-           <form class="col-xs-6">
-                <input type="text" class="search-input" name="search" placeholder="Enter keywords">
+           <form class="col-xs-8">
+                <input id="keywords" type="text" class="search-input form-control" name="search" placeholder="Enter ingredients">
                 <button id="btnSearch" class="btn btn-success">Search</button>
            </form>
-           <div id="dishType" class="col-xs-6 text-right">
-                <select>
+           <div id="dishType" class="col-xs-4 text-right">
+                <select class="form-control">
                      <option value="main dish">Main</option>
                      <option value="starter">Starter</option>
                      <option selected value="dessert">Dessert</option>
@@ -112,7 +112,7 @@
           <h4>My Dinner: <span id="numberOfGuests1"></span> People</h4>            
           </div>
           <div class="col-xs-3">
-            <button id="goBack"><h5>Go back and edit dinner</h5></button>
+            <button id="goBack" class="btn btn-default"><h5>Go back and edit dinner</h5></button>
           </div>      
         </div>
       </div>
@@ -121,7 +121,7 @@
         <ul id="overviewList" class="list-unstyled"> </ul>
         <div class="col-xs-12">
           <h4 >Total price: <span id="totalPrice"></span> SEK</h4>
-          <button id="printRecipe">Print Full Recipe</button>
+          <button id="printRecipe" class="btn btn-primary">Print Full Recipe</button>
         </div>
         
       </div>
@@ -137,7 +137,7 @@
           <h4>My Dinner: <span id="numberOfGuests2"></span> People</h4>            
           </div>
           <div class="col-xs-3">
-            <button id="goBack2"><h5>Go back and edit dinner</h5></button>
+            <button id="goBack2" class="btn btn-default"><h5>Go back and edit dinner</h5></button>
           </div>      
         </div>
       </div>

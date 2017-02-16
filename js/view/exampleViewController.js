@@ -25,6 +25,16 @@ function ExampleViewController(view,model){
 		view.updateDishType($('#dishType select option:selected').val());
 	});
 
+	view.btnSearch.click(function(e){
+		view.updateDishType($('#dishType select option:selected').val(),view.keywords.val());
+		e.preventDefault();
+	});
+
+	$('#dishOptions').on('click','#displayAll', function(){
+		view.updateDishType($('#dishType select option:selected').val());
+	});
+
+
 	$('#dishOptions').on('click','.thumbnail', function(){
 		view.showView4($(this).attr('id'));
 	});
@@ -36,7 +46,6 @@ function ExampleViewController(view,model){
 
 	$('#ingredients').on('click','#addDishButton',function(){
 		model.addDishToMenu(view.currentID);
-		console.log(view.currentID);
 	})
 
 	$('#confirmStep').click(function(){

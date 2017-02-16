@@ -61,9 +61,13 @@ var ExampleView = function (container, model) {
 	//get dish type from selected options
 	this.dishType = $('#dishType select option:selected').val();
 	this.selectDishType = container.find('#dishType select');
+	this.btnSearch = container.find('#btnSearch');
+	this.keywords = container.find('#keywords');
+	this.displayAll = container.find('#displayAll');
 
-	this.updateDishType = function(dishType){
-		var dishes = model.getSelectedDish(dishType);
+	this.updateDishType = function(dishType,filter){
+		var dishes;
+		dishes = model.getSelectedDish(dishType,filter);
 		var dishWrapper, dishImg, dishName, dishDesc;
 		$("#dishOptions ul").empty();
 		for (i = 0; i<dishes.length;i++) {
@@ -73,6 +77,10 @@ var ExampleView = function (container, model) {
 
 			dishWrapper="<li class='col-sm-4'> <div id='"+dishes[i].id+"' class='thumbnail'><img src='images/"+dishImg+"'> <div class='caption'><h4>"+dishName+"</h4><p>"+dishDesc+"</p></div> </div></li>";
 
+			$("#dishOptions ul").append(dishWrapper);
+		}
+		if(dishes.length<=0){
+			dishWrapper="<li class='col-sm-12'><p>Sorry, we can't find ingredients you want. <button id='displayAll' class='btn btn-default'>Display All Menu</button></p></li>";
 			$("#dishOptions ul").append(dishWrapper);
 		}
 	}
@@ -133,8 +141,8 @@ var ExampleView = function (container, model) {
 			menuPrep = finalMenu[i].description;
 			menuPrice = model.getCostForDish(finalMenu[i].id);
 
-			menuBox = "<li class='col-sm-3'> <div class='thumbnail'><img src='images/"+menuImg+"'> <div class='caption'><h4>"+menuName+"</h4><p>"+menuPrice+" sek</p></div> </div></li>";
-			menu_final = "<li class='col-xs-12'><div class='col-xs-2'><img class='thumbnail' src=images/"+menuImg+"></div><div class='col-xs-5'><h3>"+menuName+"</h3></div><div class='col-xs-5'><h4>Preparetion</h4><br>"+menuPrep+"</div></li>"
+			menuBox = "<li class='col-sm-6 col-md-3'> <div class='thumbnail'><img src='images/"+menuImg+"'> <div class='caption'><h4>"+menuName+"</h4><p>"+menuPrice+" sek</p></div> </div></li>";
+			menu_final = "<li class='col-xs-12'><div class='col-xs-12 col-md-2'><img class='thumbnail' src=images/"+menuImg+"></div><div class='col-xs-12 col-md-5'><h3>"+menuName+"</h3></div><div class='col-xs-12 col-md-5'><h4>Preparation</h4><br>"+menuPrep+"</div></li>"
 			$("#overviewList").append(menuBox);	
 			$("#instructionList").append(menu_final);
 		}
